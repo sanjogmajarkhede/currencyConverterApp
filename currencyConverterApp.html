@@ -1,0 +1,53 @@
+<template>
+    <div class="appPage">
+        <div class="container">
+            <div class="slds-card custom-card">
+                <form onsubmit={submitHandler}>
+                    <h1 class="slds-text-heading_large slds-text-color_inverse slds-m-bottom_medium">Currency Converter</h1>
+
+                    <img src={currencyImage} alt="Currency Icon" height="150" width="150">
+
+                    <lightning-input type="number" label="Amount" name="amount" placeholder="Amount" variant="label-hidden" required
+                        class="slds-m-vertical_x-large" onchange={handleChange}></lightning-input>
+  
+                    <div class="slds-grid slds-gutters baseline slds-m-vertical_medium">
+                        <div class="slds-col">
+                            <lightning-combobox
+                            name="countryFrom"
+                            label="From"
+                            variant="label-hidden"
+                            value={countryFrom}
+                            placeholder="Currency"
+                            options={currencyCodeList}
+                            onchange={handleChange}
+                            ></lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-text-align_center">
+                            <lightning-icon icon-name='action:change_record_type' alternative-text='change_record_type' size='small' title='change_record_type' class="custom-icon"></lightning-icon>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-combobox
+                            name="countryTo"
+                            label="To"
+                            variant="label-hidden"
+                            value={countryTo}
+                            placeholder="Currency"
+                            options={currencyCodeList}
+                            onchange={handleChange}
+                            ></lightning-combobox>
+                        </div>
+                    </div>
+
+                    <template if:true={result}>
+                        <div class="result slds-m-vertical_medium">{amount} {countryFrom} = {result} {countryTo}</div>
+                    </template>
+                    <template if:true={error}>
+                        <div class="error slds-m-vertical_medium">Something went Wrong! Please try again!</div>
+                    </template>
+
+                    <button type="Submit" class="slds-button slds-button_stretch custom-button">Convert</button>
+                </form>
+            </div>
+        </div>
+    </div> 
+</template>
